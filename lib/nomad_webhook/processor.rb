@@ -41,4 +41,11 @@ module NomadWebhook::Processor
   def json_body
     ActiveSupport::HashWithIndifferentAccess.new(JSON.load(request_body))
   end
+
+  def request_body
+    @request_body ||= (
+      request.body.rewind
+      request.body.read
+    )
+  end
 end
