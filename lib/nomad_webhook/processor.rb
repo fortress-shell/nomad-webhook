@@ -8,7 +8,7 @@ module NomadWebhook::Processor
   )
 
   def create
-    if self.respond_to?(event_method, true)
+    if whitelisted? and self.respond_to?(event_method, true)
       @result = self.send event_method
       head :bad_request unless @result.success?
     else
@@ -17,6 +17,10 @@ module NomadWebhook::Processor
   end
 
   private
+
+  def whitelisted?
+    NOMAD_EVENTS_WHITELIST.include? nomad_task_event_type
+  end
 
   def event_method
     @event_method ||= "nomad_#{nomad_task_event_type}".to_sym
