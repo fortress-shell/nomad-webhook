@@ -1,9 +1,9 @@
 require 'rails'
 
-module GithubWebhook
+module NomadWebhook
   class Railties < ::Rails::Railtie
     initializer 'Rails logger' do
-      GithubWebhook.logger = Rails.logger
+      NomadWebhook.logger = Rails.logger
     end
   end
 end

@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'github_webhook/version'
+require 'nomad_webhook/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "github_webhook"
-  spec.version       = GithubWebhook::VERSION
-  spec.authors       = ["Sebastien Saunier"]
-  spec.email         = ["seb@saunier.me"]
-  spec.summary       = %q{Process GitHub Webhooks in your Rails app (Controller mixin)}
+  spec.name          = "nomad_webhook"
+  spec.version       = NomadWebhook::VERSION
+  spec.authors       = ["Mikhail Faraponov"]
+  spec.email         = ["mikefaraponov@gmail.com"]
+  spec.summary       = %q{Process Nomad Webhooks in your Rails app (Controller mixin)}
   spec.description   = spec.summary
-  spec.homepage      = "https://github.com/ssaunier/github_webhook"
+  spec.homepage      = "https://fortress.sh"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
