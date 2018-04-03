@@ -9,7 +9,7 @@ module NomadWebhook::Processor
 
   def create
     if self.respond_to?(event_method, true)
-      @result = self.send event_method, params
+      @result = self.send event_method
       head :bad_request unless @result.success?
     else
       head :ok
