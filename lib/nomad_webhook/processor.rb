@@ -35,6 +35,10 @@ module NomadWebhook::Processor
   end
 
   def nomad_task_event_type
-    params[:TaskEvent][:Type].split(' ').join('_').underscore
+    json_body[:TaskEvent][:Type].split(' ').join('_').underscore
+  end
+
+  def json_body
+    ActiveSupport::HashWithIndifferentAccess.new(JSON.load(request_body))
   end
 end
