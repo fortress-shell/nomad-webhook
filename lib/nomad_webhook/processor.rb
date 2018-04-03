@@ -1,6 +1,10 @@
 module NomadWebhook::Processor
   extend ActiveSupport::Concern
 
+  included do
+    before_action :check_nomad_event!, only: :create
+  end
+
   NOMAD_EVENTS_WHITELIST = %w(
     terminated
     started
@@ -8,7 +12,7 @@ module NomadWebhook::Processor
   )
 
   def create
-    if whitelisted? and self.respond_to?(event_method, true)
+    if self.respond_to?(event_method, true)
       @result = self.send event_method
       head :bad_request unless @result.success?
     else
@@ -17,6 +21,10 @@ module NomadWebhook::Processor
   end
 
   private
+
+  def check_nomad_event!
+    head :ok unless whitelisted?
+  end
 
   def whitelisted?
     NOMAD_EVENTS_WHITELIST.include? nomad_task_event_type
